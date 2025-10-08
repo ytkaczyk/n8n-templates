@@ -1,0 +1,1119 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "value": 5,
+              "unit": "minutes"
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "value": "",
+          "mode": "id"
+        },
+        "event": "fileCreated",
+        "options": {
+          "fileType": "all"
+        }
+      },
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1776,
+        -240
+      ],
+      "id": "89b94288-a4f8-4d44-83d5-684ee1f1f8ec",
+      "name": "File Created",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "htidcOV6hR8kh9tB",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyX",
+              "value": 5,
+              "unit": "minutes"
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "value": "",
+          "mode": "id"
+        },
+        "event": "fileUpdated",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "typeVersion": 1,
+      "position": [
+        -1776,
+        -80
+      ],
+      "id": "0f5df51b-6339-40a6-811b-91d938e509ac",
+      "name": "File Updated",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "htidcOV6hR8kh9tB",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "500b4c9d-617a-4d88-9d74-9beb5922a00a",
+              "name": "input_file_id",
+              "value": "={{ $json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "d5779b2e-12fd-4a73-9181-da4b9eec5b67",
+              "name": "input_file_name",
+              "value": "={{ $json.name }}",
+              "type": "string"
+            },
+            {
+              "id": "f79e2578-3375-4e1d-88e0-748e2daac35b",
+              "name": "input_file_name_no_ext",
+              "value": "={{ $json.name.split('.').slice(0, -1).join('.'); }}",
+              "type": "string"
+            },
+            {
+              "id": "45b4ffe8-1ebc-48f8-8234-c497c4081f39",
+              "name": "input_mime_type",
+              "value": "={{ $json.mimeType }}",
+              "type": "string"
+            },
+            {
+              "id": "f61545a2-a33d-484e-a901-5e5bec875628",
+              "name": "input_file_url",
+              "value": "={{ $json.webContentLink }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -1376,
+        -144
+      ],
+      "id": "976834ce-c9c6-4149-a0eb-4e261acf2f85",
+      "name": "Set File ID"
+    },
+    {
+      "parameters": {
+        "content": "## 4. Update entry in Google Sheet\n\n",
+        "height": 908,
+        "width": 400,
+        "color": 7
+      },
+      "id": "7c158bf5-e8a3-43ec-a8d0-f9bb20bcf362",
+      "name": "Sticky Note3",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        960,
+        -416
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## 3. Transform the Image\n\n[Read more about Google Gemini node](https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-langchain.googlegemini/)\n[Read more about Google Gemini image generation (Nano Banana) documentation](https://ai.google.dev/gemini-api/docs/image-generation)\n\nThis workflow uses `Image Editing (Image + Text to Image)`, where the provided image is transformed based on the text prompt.\n",
+        "height": 908,
+        "width": 896,
+        "color": 7
+      },
+      "id": "0e19f1a9-e0d3-4f23-958f-ae128f9ddd6f",
+      "name": "Sticky Note2",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        16,
+        -416
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## 2. Create Entry in Google Sheet\n\n* Add a row to the Google Sheet to track progress.\n  The row identifier is the unique URL of the output folder in Google Drive.\n",
+        "height": 908,
+        "width": 568,
+        "color": 7
+      },
+      "id": "65fa206c-72e0-4f96-ae9c-cf5f86e59cec",
+      "name": "Sticky Note6",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -608,
+        -416
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## 1. Watch for New and Updated Images in Google Drive Folder\n\n[Read more about the Google Drive Trigger node](https://docs.n8n.io/integrations/builtin/trigger-nodes/n8n-nodes-base.googledrivetrigger/)\n[Read more about Google Credentials](https://docs.n8n.io/integrations/builtin/credentials/google/)\n\nOther sources, such as local file system, OneDrive, or S3, can be used instead.\n\n",
+        "height": 908,
+        "width": 728,
+        "color": 7
+      },
+      "id": "ccc1707a-8823-4d6c-bfbd-a79b6df55cf9",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1872,
+        -416
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## ⚙️ Update the Workflow Configuration Node\n\n- `google_sheet_id`: Set this to the ID of your Google Sheet. See **Google Sheets Configuration** for the sheet name and column details.\n- `dest_folder_id`: Set this to the ID of the folder where all output files will be stored.\n- `text_prompt`: Contains the prompt for the image transformation. You can customize it to accommodate other use cases. ",
+        "height": 448,
+        "width": 432,
+        "color": 4
+      },
+      "id": "73e8a4b4-1e74-4d18-8b31-6c664e70249f",
+      "name": "Sticky Note4",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1088,
+        -416
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c16e829e-d2f6-49e0-9ffe-ee0c4fca0487",
+              "name": "google_sheet_id",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "4c4d3dc8-d102-40dc-9943-7de13cb2324a",
+              "name": "dest_folder_id",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "id": "9d5a411b-53f8-4f68-80ee-c3ca9f42d276",
+              "name": "text_prompt",
+              "value": "Transform this product photo into a high-quality, studio-style image. - Background: Remove the original background completely and replace it with a clean, light gray gradient (e.g., #f0f0f0 to #e0e0e0).\\n- Lighting: Apply soft, diffused, and balanced lighting to eliminate harsh shadows and highlight the product's details. The lighting should feel natural and professional.\\n- Color & Realism: Perform subtle color correction to enhance vibrancy and ensure colors are true-to-life. Do not oversaturate.\\n- Integrity: Keep the product's shape, texture, and all original details perfectly intact. Do not add, remove, or alter any part of the product itself. If the product contains any text, especially ensure that the text is readable and identical in the new image.\\n- Final Look: The result should be a crisp, modern, and professional image suitable for a high-end e-commerce catalog.",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -928,
+        -144
+      ],
+      "id": "776406cf-fd48-4120-841f-976bc51a66a5",
+      "name": "Workflow Configuration"
+    },
+    {
+      "parameters": {
+        "content": "## 🔒 Setup credentials\n- `Edit Image` node: Configure authentication in the node using your Google AI Studio. \n  [Read more about Google Gemini(PaLM) credentials](https://docs.n8n.io/integrations/builtin/credentials/googleai/)\n\n- All `Google` nodes: Configure authentication in all the Google nodes (Drive and Sheet).\n  [Read more about Google credentials](https://docs.n8n.io/integrations/builtin/credentials/google/)\n\n\n",
+        "height": 432,
+        "width": 432,
+        "color": 4
+      },
+      "id": "bffcd12e-2061-4028-9b80-a17571ec5316",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1088,
+        64
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## 📊 Google Sheets Configuration\n\n**Required Sheet Name:** `\"Photos\"`  \nThe spreadsheet can have any name and contain any number of sheets, but it must include a sheet named `Photos`.\n\n**Required Headers (Row 1):**\n- **File name** – Name of the input file\n- **Status** – Job status (`Not Started`, `Done`, `Error`)\n- **Start Time** – Timestamp when the job starts\n- **End Time** – Timestamp when the job completes\n- **Input File** – Link to the input file (used a row identifier)\n- **Output File** – Link to the output file\n![](https://res.cloudinary.com/dhsktno2q/image/upload/v1759957160/photo-catalog-enancer-sheet_kvljo1.png)\n\n**🔗 Account Permissions**  \nThe signed-in account must have **Editor** access to the Google Sheet.\n\n**⚙️ Setup**  \nThe `Google Sheet ID` is set in the `Workflow Configuration` step.",
+        "height": 592,
+        "width": 512,
+        "color": 6
+      },
+      "id": "1d3190ef-20c5-45fc-858f-31d3785fceaa",
+      "name": "Sticky Note7",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -576,
+        -112
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## Automated image processing for e-commerce catalog\n\n### Use cases \n* Monitor a Google Drive folder, process each image based on the prompt defined in `Workflow Configuration` and save the new image to the specified output Google Drive folder.\n* Maintain a processing log in Google Sheets.\n\n👍 This use case can be extended to any scenario requiring batch image processing, for example, unifying the look and feel of team photos on a company website.\n\n### How it works\n* Trigger: Watches a Google Drive folder for new or updated files.\n* Downloads the image, processes it using Google Gemini (Nano Banana), and uploads the new image to the specified output folder.\n\n### How to use\n* Google Drive and Google Sheets nodes:\n  * Create Google credentials with access to Google Drive and Google Sheets. [Read more about Google Credentials](https://docs.n8n.io/integrations/builtin/credentials/google/).\n  * Update **all** Google Drive and Google Sheets nodes (6 nodes total) to use these credentials\n* Gemini AI node:\n  * Create Google Gemini(PaLM) Api credentials. [Read more about Google Gemini(PaLM) credentials](https://docs.n8n.io/integrations/builtin/credentials/googleai/).\n  * Update the `Edit Image` node to use the Gemini Api credentials.\n* Create a Google Sheets spreadsheet following the steps in `Google Sheets Configuration` (see right ➡️). Ensure the spreadsheet can be accessed as `Editor` by the account used for the Google Credentials.\n* Create input and output directories in Google Drive. Ensure these directories are accessible by the account used for the credentials.\n* Update the `File Created`, `File Updated` and `Workflow Configuration` node following the steps in the green Notes (see right ➡️).\n\n\n### Requirements\n* Google account with Google API access\n* Google AI Studio account with ability to create a Google Gemini API key.\n* Basic n8n knowledge: understanding of triggers, expressions, and credential management\n\n\n### Who’s it for\nAnyone wanting to batch process images for product catalog. \nOther use cases are applicable. Please [reach out](https://www.linkedin.com/in/ytkaczyk/) reach out if you need help customizing this workflow. \n\n\n### 🔒 Security\nAll credentials are stored securely using n8n's credential system.\nThe only potentially sensitive information stored in the workflow is the Google Drive folder and Sheet IDs. These should be secured according to your organization’s needs.\n\n\n### Need Help?\nReach out on [LinkedIn](https://www.linkedin.com/in/ytkaczyk/) or Ask in the [Forum](https://community.n8n.io/)!\n",
+        "height": 1024,
+        "width": 1036
+      },
+      "id": "8d478e83-a130-4db6-8ba8-815fca078d3f",
+      "name": "Sticky Note8",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -2960,
+        -464
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "## ⚙️ Configuration\n\n* **`File Created` and `File Updated` nodes**:  \n  Update the `Folder` field in both Google Drive trigger nodes to point to the ID of the folder you want to monitor. You can also set the folder by URL or select it from a list.\n\n### ❔ How to Get the ID of a Sheet or Directory ❔\n\nOpen the sheet or directory in your browser. The ID is the randomly generated alphanumeric string in the URL.\n\n* **For a directory**: The ID appears after the last `/` in the URL and looks like `abcdefghijklmnopqr_abcdefghijklmn`.\n* **For a sheet**: The ID is located in the middle of the URL and looks like `abcdefghijklmnopqrstuvwxyzABCDE_abcdefghijkl`.\n",
+        "height": 384,
+        "width": 656,
+        "color": 4
+      },
+      "id": "ce8a789d-2fae-4c97-a926-ced040c05757",
+      "name": "Sticky Note9",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1824,
+        80
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "operation": "binaryToPropery",
+        "binaryPropertyName": "input_file_data",
+        "destinationKey": "input_file_data_64",
+        "options": {}
+      },
+      "id": "415b4f7c-0d7d-4e70-99ef-dfb932ea2854",
+      "name": "Extract from File",
+      "type": "n8n-nodes-base.extractFromFile",
+      "position": [
+        128,
+        240
+      ],
+      "typeVersion": 1,
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "021aad70-de11-4387-844e-7e7dfd3b1044",
+              "name": "output_file_data_64",
+              "type": "string",
+              "value": "={{ $json.candidates?.[0]?.content?.parts?.find(part => part.inlineData).inlineData.data }}"
+            },
+            {
+              "id": "62877ef7-2057-4d35-a44b-1d58fa1f1769",
+              "name": "output_file_mime_type",
+              "type": "string",
+              "value": "={{ $json.candidates?.[0]?.content?.parts?.find(part => part.inlineData).inlineData.mimeType }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a3355567-57dc-4f15-af85-237e2faa6360",
+      "name": "Get Image Contents",
+      "type": "n8n-nodes-base.set",
+      "position": [
+        512,
+        240
+      ],
+      "typeVersion": 3.4,
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "toBinary",
+        "sourceProperty": "output_file_data_64",
+        "binaryPropertyName": "output_file_data",
+        "options": {
+          "mimeType": "={{ $json.output_file_mime_type }}"
+        }
+      },
+      "id": "f4d3287d-b380-495f-938f-50a1c7c286ec",
+      "name": "Convert to File",
+      "type": "n8n-nodes-base.convertToFile",
+      "position": [
+        704,
+        240
+      ],
+      "typeVersion": 1.1,
+      "disabled": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
+        "inputDataFieldName": "output_file_data",
+        "name": "={{ $('Set File ID').item.json.input_file_name_no_ext }}_clean.{{ $json.fileExtension }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "value": "={{ $('Workflow Configuration').item.json.dest_folder_id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        608,
+        -208
+      ],
+      "id": "4b2e6fe5-cc47-4a23-bb57-1bd26c5d4ec3",
+      "name": "Save image",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "htidcOV6hR8kh9tB",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "googlePalmApi",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"contents\": [\n    {\n      \"parts\": [\n        {\n          \"text\": \"{{ $('Workflow Configuration').item.json.text_prompt }}\"\n        },\n        {\n          \"inline_data\": {\n            \"mime_type\": \"{{ $('Set File ID').item.json.input_mime_type }}\",\n            \"data\": \"{{ $json.input_file_data_64 }}\"\n          }\n        }\n      ]\n    }\n  ],\n  \"generationConfig\": {\n    \"responseModalities\": [\n      \"TEXT\",\n      \"IMAGE\"\n    ]\n  }\n}",
+        "options": {}
+      },
+      "id": "0623016d-db66-4c79-8fc6-9b4941d67f71",
+      "name": "Gemini Image",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        320,
+        240
+      ],
+      "typeVersion": 4.2,
+      "credentials": {
+        "googlePalmApi": {
+          "id": "7tlny7NnnrQIfupF",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "resource": "image",
+        "operation": "edit",
+        "prompt": "={{ $('Workflow Configuration').item.json.text_prompt }}",
+        "images": {
+          "values": [
+            {
+              "binaryPropertyName": "input_file_data"
+            }
+          ]
+        },
+        "options": {
+          "binaryPropertyOutput": "output_file_data"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        416,
+        -144
+      ],
+      "id": "1577bea0-da46-4ec4-9557-a6ea6e6176bc",
+      "name": "Edit Image",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "7tlny7NnnrQIfupF",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $('Set File ID').item.json.input_file_id }}",
+          "mode": "id"
+        },
+        "options": {
+          "binaryPropertyName": "input_file_data"
+        }
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        224,
+        -144
+      ],
+      "id": "d6974e29-567e-4afd-8faf-3c882c8eb116",
+      "name": "Download Image",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "htidcOV6hR8kh9tB",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## 🤓 Technical note\n\nThe Gemini node `Edit Image` replaces the following nodes. Using the detailed workflow may still be helpful is you need finer-grainer configuration (e.g., model selection). \n\nFeel free to reach out if you need help with this.",
+        "height": 384,
+        "width": 832
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        48,
+        80
+      ],
+      "id": "656cd1d8-0ebe-4aec-8fb2-1f84b43afdc4",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $('Workflow Configuration').item.json.google_sheet_id }}"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 636612761,
+          "mode": "list",
+          "cachedResultName": "Photos",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AA79VkgHlRW6UwkZ7CYqQjnPVPM31lX3jlYlofWQZlU/edit#gid=636612761"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "Completed",
+            "Input File": "={{ $('Set File ID').item.json.input_file_url }}",
+            "Output File": "={{ $json.webContentLink }}",
+            "End Time": "={{ $now.format('yyyy-MM-dd hh:mm:ss') }}"
+          },
+          "matchingColumns": [
+            "Input File"
+          ],
+          "schema": [
+            {
+              "id": "File name",
+              "displayName": "File name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Start Time",
+              "displayName": "Start Time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "End Time",
+              "displayName": "End Time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Input File",
+              "displayName": "Input File",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Output File",
+              "displayName": "Output File",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Notes",
+              "displayName": "Notes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1120,
+        -208
+      ],
+      "id": "321f1e99-30ae-4a43-abe4-811f0f916097",
+      "name": "Update Entry to Done",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "HTAGRgrsWTF0cfU2",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $('Workflow Configuration').item.json.google_sheet_id }}"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 636612761,
+          "mode": "list",
+          "cachedResultName": "Photos",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AA79VkgHlRW6UwkZ7CYqQjnPVPM31lX3jlYlofWQZlU/edit#gid=636612761"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "Error",
+            "Input File": "={{ $('Set File ID').item.json.input_file_url }}",
+            "Output File": "={{ $json.webContentLink }}",
+            "End Time": "={{ $now.format('yyyy-MM-dd hh:mm:ss') }}"
+          },
+          "matchingColumns": [
+            "Input File"
+          ],
+          "schema": [
+            {
+              "id": "File name",
+              "displayName": "File name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Start Time",
+              "displayName": "Start Time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "End Time",
+              "displayName": "End Time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Input File",
+              "displayName": "Input File",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Output File",
+              "displayName": "Output File",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Notes",
+              "displayName": "Notes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1120,
+        -16
+      ],
+      "id": "6bf94d10-19f2-47a6-8a7c-6613484b09c4",
+      "name": "Update Entry to Error",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "HTAGRgrsWTF0cfU2",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Mug 2\n![](https://res.cloudinary.com/dhsktno2q/image/upload/v1759955739/mug_2_owhc8n.jpg)",
+        "height": 336,
+        "width": 224,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1632,
+        -800
+      ],
+      "id": "c249c5de-8e46-4109-a884-57e15a47bc05",
+      "name": "Sticky Note10"
+    },
+    {
+      "parameters": {
+        "content": "## Mug 2\n![](https://res.cloudinary.com/dhsktno2q/image/upload/v1759955740/mug_2_clean_elpb8h.png)",
+        "height": 352,
+        "width": 224,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        528,
+        -816
+      ],
+      "id": "ff333f53-c485-4227-9d2e-b90889f88798",
+      "name": "Sticky Note11"
+    },
+    {
+      "parameters": {
+        "content": "## Mug 1\n![](https://res.cloudinary.com/dhsktno2q/image/upload/v1759955738/mug_1_unlpi0.jpg)",
+        "height": 336,
+        "width": 224,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1872,
+        -800
+      ],
+      "id": "d4e82449-1cff-4e83-a392-ee01c22b21a6",
+      "name": "Sticky Note12"
+    },
+    {
+      "parameters": {
+        "content": "## Mug 1\n![](https://res.cloudinary.com/dhsktno2q/image/upload/v1759955739/mug_1_clean_eqrfj6.png)",
+        "height": 352,
+        "width": 224,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        288,
+        -816
+      ],
+      "id": "271d04ca-757d-4aca-ba25-d915ef0dac5c",
+      "name": "Sticky Note13"
+    },
+    {
+      "parameters": {
+        "content": "## Speaker ![](https://res.cloudinary.com/dhsktno2q/image/upload/v1759955739/speaker_cugs54.jpg)",
+        "height": 336,
+        "width": 224,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1392,
+        -800
+      ],
+      "id": "9e509087-74a1-4721-ad55-0f64970eaf4c",
+      "name": "Sticky Note14"
+    },
+    {
+      "parameters": {
+        "content": "## Speaker ![](https://res.cloudinary.com/dhsktno2q/image/upload/v1759955738/speaker_clean_cbjmvq.png)",
+        "height": 352,
+        "width": 224,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        768,
+        -816
+      ],
+      "id": "b2a16a13-8e22-4deb-be64-718fef0860c6",
+      "name": "Sticky Note15"
+    },
+    {
+      "parameters": {
+        "content": "## Flowers\n![](https://res.cloudinary.com/dhsktno2q/image/upload/v1759956515/flowers_nwjnfp.jpg)",
+        "height": 336,
+        "width": 352,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -1152,
+        -800
+      ],
+      "id": "126b15d5-b395-46a8-bd88-6f5b244da0ab",
+      "name": "Sticky Note16"
+    },
+    {
+      "parameters": {
+        "content": "## Flowers\n\n![](https://res.cloudinary.com/dhsktno2q/image/upload/v1759956721/flowers_clean_vefyd0.png)",
+        "height": 352,
+        "width": 352,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        1008,
+        -816
+      ],
+      "id": "b3cfaa82-a7e2-4091-9d5c-34875881e312",
+      "name": "Sticky Note17"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "={{ $('Workflow Configuration').item.json.google_sheet_id }}",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 636612761,
+          "mode": "list",
+          "cachedResultName": "Photos",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1AA79VkgHlRW6UwkZ7CYqQjnPVPM31lX3jlYlofWQZlU/edit#gid=636612761"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "File name": "={{ $('Set File ID').item.json.input_file_name }}",
+            "Start Time": "={{ $now.format('yyyy-MM-dd hh:mm:ss') }}",
+            "Input File": "={{ $('Set File ID').item.json.input_file_url }}",
+            "Status": "Not Started"
+          },
+          "matchingColumns": [
+            "Input File"
+          ],
+          "schema": [
+            {
+              "id": "File name",
+              "displayName": "File name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Start Time",
+              "displayName": "Start Time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "End Time",
+              "displayName": "End Time",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Input File",
+              "displayName": "Input File",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Output File",
+              "displayName": "Output File",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Notes",
+              "displayName": "Notes",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -400,
+        -272
+      ],
+      "id": "cf23fcb3-2569-4484-b104-315a0ac445ba",
+      "name": "Create Entry",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "HTAGRgrsWTF0cfU2",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "File Created": {
+      "main": [
+        [
+          {
+            "node": "Set File ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "File Updated": {
+      "main": [
+        [
+          {
+            "node": "Set File ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set File ID": {
+      "main": [
+        [
+          {
+            "node": "Workflow Configuration",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Workflow Configuration": {
+      "main": [
+        [
+          {
+            "node": "Create Entry",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Convert to File": {
+      "main": [
+        []
+      ]
+    },
+    "Get Image Contents": {
+      "main": [
+        [
+          {
+            "node": "Convert to File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        [
+          {
+            "node": "Gemini Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save image": {
+      "main": [
+        [
+          {
+            "node": "Update Entry to Done",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini Image": {
+      "main": [
+        [
+          {
+            "node": "Get Image Contents",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Image": {
+      "main": [
+        [
+          {
+            "node": "Save image",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Update Entry to Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download Image": {
+      "main": [
+        [
+          {
+            "node": "Edit Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Entry to Done": {
+      "main": [
+        []
+      ]
+    },
+    "Create Entry": {
+      "main": [
+        [
+          {
+            "node": "Download Image",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
