@@ -10,14 +10,14 @@ Template is available as an official n8n workflow at [Enhance Product Photos wit
 <table style="border: 0; boder-collapse: collapse; padding: 0;" >
   <tbody>
     <tr>
-      <td><img alt="Flower vase" src="photo-catalog-enhancer/assets/flowers.jpg" width=250px  /></td>
-      <td><img alt="" src="photo-catalog-enhancer/assets/ai-technology.png" /></td>
-      <td><img alt="Fixed Flower vase" src="photo-catalog-enhancer/assets/flowers_clean.png" width=250px  /></td>
+      <td><img alt="Flower vase" src="assets/flowers.jpg" width=250px  /></td>
+      <td><img alt="" src="assets/ai-technology.png" /></td>
+      <td><img alt="Fixed Flower vase" src="assets/flowers_clean.png" width=250px  /></td>
     </tr>
     <tr>
-      <td><img alt="Mug" src="photo-catalog-enhancer/assets/mug_2.jpg" width=250px  /></td>
-      <td><img alt="" src="photo-catalog-enhancer/assets/ai-technology.png" /></td>
-      <td><img alt="Fixed Mug" src="photo-catalog-enhancer/assets/mug_2_clean.png" width=250px  /></td>
+      <td><img alt="Mug" src="assets/mug_2.jpg" width=250px  /></td>
+      <td><img alt="" src="assets/ai-technology.png" /></td>
+      <td><img alt="Fixed Mug" src="assets/mug_2_clean.png" width=250px  /></td>
     </tr>
   </tbody>
 </table>
